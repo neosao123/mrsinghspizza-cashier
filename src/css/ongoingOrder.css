@@ -21,7 +21,7 @@ h6 {
   color: #525252;
 }
 .topping-list {
-  max-height: 12rem;
+  max-height: 17rem;
   overflow-y: auto;
   width: 100%;
 }
@@ -29,7 +29,7 @@ h6 {
   min-width: 100%;
 }
 .addToCartList {
-  min-height: 19rem;
+  height: calc(100vh - 120px);
   overflow-y: auto;
 }
 .inputGroupTxt {
@@ -67,6 +67,50 @@ h6 {
   border: none;
   background-color: #ffcb8a !important;
   border-radius: 0%;
-  color: #a46000 !important;
+  color: #000000 !important;
   font-weight: 600;
+}
+.orderContainer {
+  height: calc(100vh - 96px);
+  overflow: hidden;
+}
+.height-100 {
+  height: 100%;
+}
+.sectionTwo {
+  overflow: auto;
+  height: 100%;
+}
+.cart {
+  height: calc(100vh - 128px);
+  justify-content: space-between;
+}
+.sectionOne {
+  height: calc(100vh - 128px);
+  overflow-y: scroll;
+}
+.badge-poutine {
+  text-transform: capitalize;
+  color: #b1130be4;
+}
+.badge-side {
+  text-transform: capitalize;
+  color: #094f90e4;
+}
+.badge-plantbites {
+  text-transform: capitalize;
+  color: #1d9238e4;
+}
+.badge-tenders {
+  text-transform: capitalize;
+  color: #638d0ee4;
+}
+.badge-subs {
+  text-transform: capitalize;
+  color: #8b0b45e4;
+}
+.custom-hover:hover {
+  background-color: #af886f;
+  /* color: #ffffff; */
+  /* border: none; */
 }

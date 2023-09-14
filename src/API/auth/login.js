@@ -1,4 +1,4 @@
-import { publicApi } from "../apiFunction";
+import { publicApi } from "../publicapis";
 
 // Login Api
 export const loginApi = async (payload) => {

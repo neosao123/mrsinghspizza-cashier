@@ -1,0 +1,59 @@
+{
+    "productCode":"",
+    "type": "pizza",
+    "name": "",
+    "pizzaSize":"Large / Extra-Large",
+    "config": {
+        "pizza": [
+            {
+                "crust": {
+                    "crustCode":"",
+                    "crustName": "",
+                    "crustPrice": ""
+                },
+                "cheeseName": {
+                    "cheeseCode":"",
+                    "cheeseName":"",
+                    "cheesePrice": ""
+                },
+                "specialBases": {
+                    "specialBaseCode": "",
+                    "specialBaseName" : "",
+                    "specialBasePrice": ""
+                },
+                "toppings": [
+                    {
+                        "toppingsCode": "",
+                        "toppingsName":"",
+                        "toppingsPrice": ""
+                    },
+                    {
+                        "toppingsCode": "",
+                        "toppingsName":"",
+                        "toppingsPrice": ""
+                    }
+                ]
+                
+            }
+        ],
+        "sides" : [{
+            "sidesCode":"",
+            "sidesName":"",
+            "sideSize": "",
+            "sidesPrice":""
+        }],
+        "dips" : [{
+            "dipsCode":"",
+            "dipsName": "",
+            "dipsPrice":""
+        }],
+        "drinks": [{
+            "drinksCode":"",
+            "drinksName": "",
+            "softDrinksPrices":""
+        }]
+    },
+    "qty":"",
+    "price":"",
+    "amount":""
+}

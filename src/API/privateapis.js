@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-console.log("token from api function: ", token);
 const base_url = process.env.REACT_APP_API;
+const token = localStorage.getItem("token");
 
 export const privateAPi = axios.create({
   baseURL: base_url,
@@ -11,8 +10,4 @@ export const privateAPi = axios.create({
     Authorization: "Bearer " + token,
   },
   withCredentials: false,
-});
-
-export const publicApi = axios.create({
-  baseURL: base_url,
 });

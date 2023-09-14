@@ -1,0 +1,127 @@
+{
+    "cartCode": "#NA",
+    "customerCode": "#NA",
+    "customerName": "qwerty",
+    "mobileNumber": "9786656454",
+    "address": "asdfghj",
+    "deliveryType": "pickup",
+    "storeLocation": "Dixie/NorthPark",
+    "productCode": "",
+    "productName": "",
+    "productType": "Pizza",
+    "config": {
+        "pizza": [
+            {
+                "crust": {
+                    "crustCode": "CR_2",
+                    "crustName": "Gluten",
+                    "crustPrice": "0"
+                },
+                "cheese": {
+                    "cheeseCode": "CHE_2",
+                    "cheeseName": "Feta",
+                    "cheesePrice": "0"
+                },
+                "specialBases": {
+                    "specialbaseCode": "SPB_6",
+                    "specialbaseName": "Tandoori",
+                    "specialbasePrice": "2.00"
+                },
+                "toppings": {
+                    "countAsTwoToppings": [
+                        {
+                            "toppingsCode": "TOP_42",
+                            "toppingsName": "VEGAN PANEER",
+                            "toppingsPrice": "10.00",
+                            "toppingsPlacement": "righthalf"
+                        }
+                    ],
+                    "countAsOneToppings": [
+                        {
+                            "toppingsCode": "TOP_49",
+                            "toppingsName": "Thick Crust",
+                            "toppingsPrice": "10.00",
+                            "toppingsPlacement": "righthalf"
+                        },
+                        {
+                            "toppingsCode": "TOP_48",
+                            "toppingsName": "Red Chilli",
+                            "toppingsPrice": "10.00",
+                            "toppingsPlacement": "whole"
+                        }
+                    ],
+                    "freeToppings": [
+                        {
+                            "toppingsCode": "TOP_49",
+                            "toppingsName": "Thick Crust",
+                            "toppingsPrice": "10.00",
+                            "toppingsPlacement": "righthalf"
+                        },
+                        {
+                            "toppingsCode": "TOP_46",
+                            "toppingsName": "Ginger",
+                            "toppingsPrice": "10.00",
+                            "toppingsPlacement": "whole"
+                        },
+                        {
+                            "toppingsCode": "TOP_47",
+                            "toppingsName": "Green Chilli",
+                            "toppingsPrice": "10.00",
+                            "toppingsPlacement": "whole"
+                        }
+                    ]
+                }
+            }
+        ],
+        "sides": [
+            {
+                "sidesCode": "SD_25",
+                "sidesName": "Shahi Paneer",
+                "sidesType": "poutine",
+                "lineCode": "SDL_38",
+                "sidesPrice": "12.99",
+                "sidesSize": "1 BOC"
+            },
+            {
+                "sidesCode": "SD_24",
+                "sidesName": "Tandoori Paneer",
+                "sidesType": "poutine",
+                "lineCode": "SDL_37",
+                "sidesPrice": "12.99",
+                "sidesSize": "1 BOX"
+            },
+            {
+                "sidesCode": "SD_11",
+                "sidesName": "Mushroom Bites",
+                "sidesType": "side",
+                "lineCode": "SDL_18",
+                "sidesPrice": "12.99",
+                "sidesSize": "10 PIECES"
+            }
+        ],
+        "dips": [
+            {
+                "dipsCode": "DI_2",
+                "dipsName": "Chilli Chipotle",
+                "dipsPrice": "1.50"
+            }
+        ],
+        "drinks": [
+            {
+                "drinksCode": "SFD_3",
+                "drinksName": "6 Pops",
+                "drinksPrice": "5.99"
+            },
+            {
+                "drinksCode": "SFD_4",
+                "drinksName": "1 Can",
+                "drinksPrice": "4.99"
+            }
+        ]
+    },
+    "quantity": "",
+    "price": "",
+    "amount": "",
+    "comment": "qwerty",
+    "pizzaSize": "Large"
+}

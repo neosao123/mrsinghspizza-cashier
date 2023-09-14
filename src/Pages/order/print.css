@@ -1,0 +1,7 @@
+/* billing.css */
+@media print {
+  body {
+    width: 100%; /* Set the paper width to 100% to fit any printer page */
+    /* margin: 0px; */
+  } /* Add other styles as needed for your print layout */
+}

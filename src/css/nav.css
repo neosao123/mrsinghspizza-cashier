@@ -36,3 +36,39 @@
 .orderDrop:hover {
   background-color: #e2e2e2;
 }
+.dropdown-item {
+  cursor: pointer;
+}
+.bell-button {
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+}
+.fa-bell-o {
+  font-size: 1.1rem;
+}
+.notify-count {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  color: #ffffff;
+  background-color: #ff0000;
+  width: 16px;
+  height: 16px;
+  font-size: 0.6rem;
+  border-radius: 50%;
+}
+.profile-button {
+  border: none;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}

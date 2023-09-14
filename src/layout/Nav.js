@@ -1,26 +1,45 @@
-import React, { Profiler, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import navStylesheet from "../css/nav.css";
+import React, { useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import "../css/nav.css";
 import logo from "../assets/logo.png";
 import profileImg from "../assets/user.png";
 import arrowKey from "../assets/arrow-key.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { user, setUser, setToken } from "../reducer/userReducer";
+
 
 function Nav() {
+  //redux-dispatch
   const dispatch = useDispatch();
+  //navigator
   const navigate = useNavigate();
+  //states
+  const [loginUserData, setLoginUserData] = useState(null);
+
+  let userData = useSelector((state) => state.user.userData);
 
   //logout
-  const Logout = () => {
-    console.log("logout");
+  const handleLogout = () => {
     localStorage.removeItem("token");
-
-    dispatch({
-      type: "LOGOUT",
-      payload: null,
-    });
+    localStorage.removeItem("cashierCode");
+    dispatch(setUser(null));
+    dispatch(setToken(""));
     navigate("/");
   };
+
+  //navigate to profile update page
+  const handleProfileUdpate = () => {
+    navigate("/profile-update");
+  }
+
+  // navigate to password update page
+  const handlePasswordChange = () => {
+    navigate("/password-change");
+  }
+
+  useEffect(() => {
+    setLoginUserData(userData);
+  }, [userData]);
 
   return (
     <>
@@ -39,32 +58,21 @@ function Nav() {
 
           <div className="">
             <span className="mb-0 brandName">
-              <strong>Mr Singh's Pizza</strong>
+              <strong>Mr Singh's Pizza <small className="text-secondary">(Cashier)</small></strong>
             </span>
           </div>
 
           <div className="d-flex justify-content-around align-items-center align-content-center">
-            {/* Notification */}
-            <a
-              className=""
-              role="button"
+            <button
+              className="bell-button me-3"
+              type="button"
               id="notify"
-              href="#"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <i
-                className="fa fa-bell-o"
-                aria-hidden="true"
-                width="25%"
-                height="25%"
-              ></i>
-              <sup>
-                <span className="start-100 translate-middle badge rounded-pill bg-danger">
-                  2
-                </span>
-              </sup>
-            </a>
+              <i className="fa fa-bell-o" aria-hidden="true"></i>
+              <span className="notify-count">2</span>
+            </button>
             <div
               className="dropdown-menu dropdown-menu-right notify-menu mt-2 m-0 p-0"
               aria-labelledby="notify"
@@ -73,7 +81,7 @@ function Nav() {
                 <h6 className="mb-1">2 New</h6>
                 <span>Notification</span>
               </div>
-              <a className="dropdown-item border-bottom p-2 px-4" href="#">
+              <div className="dropdown-item border-bottom p-2 px-4" href="#">
                 <div className="">
                   <span className="d-inline-block mb-1">Order No :</span>
                   <span className="mx-2">98876767</span>
@@ -82,8 +90,8 @@ function Nav() {
                   <span className="d-inline-block mb-1">Price : </span>
                   <span className="mx-2">$12.92</span>
                 </div>
-              </a>
-              <a className="dropdown-item border-bottom p-2 px-4" href="#">
+              </div>
+              <div className="dropdown-item border-bottom p-2 px-4" href="#">
                 <div className="">
                   <span className="d-inline-block mb-1">Order No :</span>
                   <span className="mx-2">98876767</span>
@@ -92,110 +100,102 @@ function Nav() {
                   <span className="d-inline-block mb-1">Price : </span>
                   <span className="mx-2">$12.92</span>
                 </div>
-              </a>
+              </div>
               <div
                 className="d-flex py-2 px-5 justify-content-center"
                 style={{ cursor: "pointer" }}
               >
                 <span className="">
                   Check all notifications
-                  <img className="mx-2" src={arrowKey} width="10px"></img>
+                  <img className="mx-2" src={arrowKey} width="10px" />
                 </span>
               </div>
             </div>
             {/* Profile Update */}
-            <a
-              className="bg-transparent text-center p-0 border-none"
-              role="button"
-              id="profile"
-              href="#"
-              data-bs-toggle="dropdown"
-            >
+            <button className="profile-button" type="button" id="profile" data-bs-toggle="dropdown" aria-expanded="false">
               <img
-                src={profileImg}
-                width="30%"
-                height="30%"
-                alt=""
-                className="rounded-circle"
-              ></img>
-            </a>
+                src={loginUserData?.profilePhoto !== "" ? loginUserData?.profilePhoto : profileImg}
+                alt={loginUserData?.firstName + " " + loginUserData?.lastName}
+                style={{ width: "32px", height: "32px", borderRadius: "50%" }}
+              />
+            </button>
             <div
               className="dropdown-menu dropdown-menu-right mt-2 p-0 profile-menu"
               aria-labelledby="profile-update"
             >
               <div className="d-flex justify-content-left align-items-center p-3 profileDiv text-white">
-                <div className="border rounded-circle border-2 border-white imgDiv mx-2">
-                  <img
-                    src={`${profileImg}`}
-                    alt=""
-                    className="rounded-circle w-100 h-100"
-                  ></img>
-                </div>
-                <div className="d-flex justify-content-center flex-column align-items-left p-1">
-                  <h6>ABC</h6>
-                  <a style={{ fontSize: ".75rem" }}>abc@example.com</a>
+                <img
+                  src={loginUserData?.profilePhoto !== "" ? loginUserData?.profilePhoto : profileImg}
+                  alt={loginUserData?.firstName + " " + loginUserData?.lastName}
+                  style={{ width: "36px", height: "36px", borderRadius: "50%" }}
+                  className="me-1"
+                />
+                <div className="d-flex justify-content-center flex-column align-items-left">
+                  <h6>{loginUserData?.firstName + " " + loginUserData?.lastName}</h6>
+                  <p className="mb-0">{loginUserData?.email}</p>
                 </div>
               </div>
-              <a className="dropdown-item p-2 px-3" href="#">
-                <i className="fa fa-user" aria-hidden="true"></i>
-                <span className="mx-3">Profile Update</span>
-              </a>
-              <a className="dropdown-item p-2 px-3" href="#">
-                <i className="fa fa-key" aria-hidden="true"></i>
-                <span className="mx-3">Password Change</span>
-              </a>
-              <a className="dropdown-item p-2 px-3 mb-2">
-                <i className="fa fa-sign-out" aria-hidden="true"></i>
-                <span onClick={() => Logout} className="mx-3">
-                  Logout
-                </span>
-              </a>
+              <div className="dropdown-item py-2" onClick={handleProfileUdpate}>
+                <i className="fa fa-user me-2 text-secondary" aria-hidden="true"></i>
+                <span className="">Profile Update</span>
+              </div>
+              <div className="dropdown-item py-2" onClick={handlePasswordChange}>
+                <i className="fa fa-lock me-2 text-secondary" aria-hidden="true"></i>
+                <span className="">Password Change</span>
+              </div>
+              <div className="dropdown-item py-2" onClick={handleLogout}>
+                <i className="fa fa-sign-out me-2 text-secondary" aria-hidden="true"></i>
+                <span className="">Logout</span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Tabs */}
         <hr className="bg-secondary text-secondary mb-1 m-0 p-0 "></hr>
+
+        {/* Tabs */}
+
         <div className="mx-4">
           <ul className="nav nav-pills nav-fill">
             <li className="nav-item">
               <NavLink
                 to="/ongoing-orders"
                 className="nav-link"
-                activeClassName="active"
+                activeclassname="active"
               >
-                <strong className="nav-text">Ongoing Order</strong>
+                <strong className="nav-text">New Order</strong>
               </NavLink>
             </li>
             <li className="nav-item dropdown">
               <NavLink
                 to="/orders"
                 className="nav-link"
-                activeClassName="active"
+                activeclassname="active"
               >
-                <strong className="nav-text">Order</strong>
+                <strong className="nav-text">Orders</strong>
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink
                 to="/invoices"
                 className="nav-link"
-                activeClassName="active"
+                activeclassname="active"
               >
                 <strong className="nav-text">Invoices</strong>
               </NavLink>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink
                 to="/reports"
                 className="nav-link"
-                activeClassName="active"
+                activeclassname="active"
               >
                 <strong className="nav-text">Reports</strong>
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
+
         <hr className="bg-secondary text-secondary mt-1 m-0 p-0"></hr>
       </div>
     </>

@@ -5,19 +5,21 @@ import { useFormik } from "formik";
 import bgImage from "../../assets/bg-img.jpg";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
+import { user, setUser, setToken } from "../../reducer/userReducer";
+import logo from "../../assets/logo.png";
+import { ToastContainer, toast } from "react-toastify";
 
 // Validation Functions
 const getCharacterValidationError = (str) => {
   return `Your password must have at least 1 ${str} character`;
 };
+
+
 const ValidateSchema = Yup.object({
-  userName: Yup.string().required("Rquired"),
+  userName: Yup.string().required("Username is required").matches(/^[a-zA-Z0-9\s]+$/, "Invalid characters in user-name").min(4, "Username should be 4 characters minimum").max(20, "Maximum characters reached"),
   password: Yup.string()
-    .required("Required")
-    .min(8, "Password must have at least 8 characters")
-    .matches(/[0-9]/, getCharacterValidationError("digit")),
-  // .matches(/[a-z]/, getCharacterValidationError("lowercase"))
-  // .matches(/[A-Z]/, getCharacterValidationError("uppercase")),
+    .required("Password is required")
+    .min(6, "Password must have at least 6 characters")
 });
 
 function Login() {
@@ -25,58 +27,53 @@ function Login() {
     userName: "",
     password: "",
   });
-
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation;
 
-  const authToken = localStorage.getItem("token");
 
-  useEffect(() => {
-    const intended = location.state;
-    if (intended) {
-      navigate("/");
-    } else {
-      if (authToken) {
-        navigate("/ongoing-orders");
-      } else if (!authToken) {
-        navigate("/");
-      }
-    }
-  }, [authToken, navigate]);
+  const userData = useSelector((state) => state.user.userData);
 
   const onSubmit = async (values) => {
-    console.log(values);
     try {
-      loginApi(values)
+      setLoading(true);
+      await loginApi(values)
         .then(async (res) => {
-          dispatch({
-            type: "LOGGD_IN_USER",
-            payload: {
-              token: res.data.token,
-              code: res.data.data.code,
-              userName: res.data.data.userName,
-              firstName: res.data.data.firstName,
-              lastName: res.data.data.lastName,
-              mobileNumber: res.data.data.mobileNumber,
-              email: res.data.data.email,
-              isActive: res.data.data.isActive,
-              firebaseId: res.data.data.firebaseId,
-              profilePhoto: res.data.data.profilePhoto,
-            },
-          });
-
-          // Store res in LocalStorage
-          let parseToken = res.data.token;
-          localStorage.setItem("token", parseToken);
-
-          navigate("/ongoing-orders");
+          // Store res in LocalStorage 
+          let data = res.data;
+          if (data.token && data.data) {
+            let parseToken = res.data.token;
+            localStorage.setItem("token", parseToken);
+            localStorage.setItem("cashierCode", res.data.data.code);
+            const payload = {
+              code: data.data.code,
+              userName: data.data.userName,
+              firstName: data.data.firstName,
+              lastName: data.data.lastName,
+              mobileNumber: data.data.mobileNumber,
+              email: data.data.email,
+              isActive: data.data.isActive,
+              firebaseId: data.data.firebaseId,
+              profilePhoto: data.data.profilePhoto,
+            }
+            dispatch(setUser(payload));
+            dispatch(setToken(res.data.token));
+            setTimeout(() => {
+              navigate("/ongoing-orders");
+            }, 800);
+          } else {
+            setLoading(false);
+            toast.error(data.message);
+          }
         })
         .catch((err) => {
+          setLoading(false);
           console.log("Error From LoginApi: ", err);
         });
     } catch (err) {
+      setLoading(false);
       console.log("Exception From LoginApi", err);
+      setLoading(false);
     }
   };
 
@@ -89,6 +86,12 @@ function Login() {
     enableReinitialize: true,
   });
 
+  useEffect(() => {
+    if (userData) {
+      navigate("/ongoing-orders");
+    }
+  }, [userData, navigate]);
+
   return (
     <>
       <div
@@ -97,20 +100,27 @@ function Login() {
           backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          opacity: ".9",
         }}
       >
         <div
-          className="p-5"
+          className="p-4"
           style={{
             backgroundColor: "#f7f7f7",
             borderRadius: "1%",
-            width: "40%",
-            opacity: ".9",
+            width: "25%",
             zIndex: "100",
           }}
         >
-          <h4 className="mb-4 text-center">Login</h4>
+          <div className="w-100 h-25 d-flex justify-content-center">
+            <img
+              src={logo}
+              width="15%"
+              height="15%"
+              alt=""
+              className="mb-2"
+            ></img>
+          </div>
+          <h5 className="mb-4 text-center">Login</h5>
           <form onSubmit={formik.handleSubmit}>
             <label className="form-label">Username</label>
             <input
@@ -146,13 +156,15 @@ function Login() {
                 type="submit"
                 className="btn px-4 mt-1 w-100 text-center btn-rounded"
                 style={{ backgroundColor: "#ff8c00", color: "#f4f4f4" }}
+                disabled={loading}
               >
-                <strong>Login</strong>
+                <strong>{loading ? "Please wait..." : "Login"}</strong>
               </button>
             </div>
           </form>
         </div>
       </div>
+      <ToastContainer hideProgressBar={true} position="top-center"/>
     </>
   );
 }
