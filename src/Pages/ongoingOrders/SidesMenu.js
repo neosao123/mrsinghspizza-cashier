@@ -110,6 +110,7 @@ function SidesMenu({ discount, taxPer, payloadEdit, setPayloadEdit }) {
         config: {
           lineCode: selectedCombinationObj[0].lineCode,
           sidesSize: selectedCombinationObj[0].size,
+          sidesType: Obj?.type
         },
         quantity: 1,
         price: selectedCombinationObj[0].price,
@@ -144,7 +145,7 @@ function SidesMenu({ discount, taxPer, payloadEdit, setPayloadEdit }) {
       (sides) => sides.sideCode === sideCode
     );
 
-    if (payloadEdit !== undefined && payloadEdit.productType === "side") { 
+    if (payloadEdit !== undefined && payloadEdit.productType === "side") {
       const payloadForEdit = {
         id: payloadEdit?.id,
         customerCode: customerCode ? customerCode : "#NA",
@@ -155,6 +156,7 @@ function SidesMenu({ discount, taxPer, payloadEdit, setPayloadEdit }) {
         config: {
           lineCode: selectedSide[0].combination[0].lineCode,
           sidesSize: selectedSide[0].combination[0].sidesSize ? selectedSide[0].combination[0].sidesSize : selectedSide[0].combination[0].size,
+          sidesType: selectedSide[0].type
         },
         quantity: selectedSide[0].qty,
         price: selectedSide[0].price,
@@ -180,7 +182,7 @@ function SidesMenu({ discount, taxPer, payloadEdit, setPayloadEdit }) {
       setSidesData(temp);
       setSidesArr([]);
       setQuantity(1);
-    } else { 
+    } else {
       const payload = {
         id: uuidv4(),
         customerCode: customerCode ? customerCode : "#NA",
@@ -191,6 +193,7 @@ function SidesMenu({ discount, taxPer, payloadEdit, setPayloadEdit }) {
         config: {
           lineCode: selectedCombination[0]?.lineCode,
           sidesSize: selectedCombination[0]?.size,
+          sidesType: selectedSideForNewItem[0]?.type
         },
         quantity: selectedSideForNewItem[0]?.qty
           ? selectedSideForNewItem[0]?.qty

@@ -246,7 +246,7 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
   const handleOneToppings = (e, count, countAsOneToppings) => {
     const { checked } = e.target;
     delete countAsOneToppings.image;
-    console.log(" Count 1 Special Pizza Topping ", countAsOneToppings);
+    //console.log(" Count 1 Special Pizza Topping ", countAsOneToppings);
     if (checked) {
       setPizzaState((prevState) => {
         const newState = [...prevState];
@@ -478,6 +478,7 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
   const handleSides = (e, sides) => {
     let { checked } = e.target;
     delete sides.image;
+
     if (checked) {
       let obj = {
         ...sides,
@@ -485,7 +486,7 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
         quantity: 1,
         sideType: sides.type,
       };
-      // console.log("SPECIAL PIZZA SIDES ********************************", obj);
+      console.log("SPECIAL PIZZA SIDES ********************************", obj);
       setSidesArr([obj]);
     } else {
       let filteredSides = sidesArr?.filter((item) => item.code !== sides.code);
@@ -768,8 +769,8 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
       pizzaSize === "Large"
         ? Number(getSpecialData?.largePizzaPrice)
         : pizzaSize === "Extra Large"
-        ? Number(getSpecialData?.extraLargePizzaPrice)
-        : 0;
+          ? Number(getSpecialData?.extraLargePizzaPrice)
+          : 0;
 
     let pizzaCartons = [];
     for (let i = 0; i < getSpecialData?.noofPizzas; i++) {
@@ -934,8 +935,8 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
           Number(getSpecialData?.largePizzaPrice) > 0
             ? "Large"
             : Number(getSpecialData?.extraLargePizzaPrice) > 0
-            ? "Extra Large"
-            : ""
+              ? "Extra Large"
+              : ""
         );
       }
     }
@@ -1150,14 +1151,14 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
                                     dipsArr[comm]?.qty
                                       ? dipsArr[comm]?.qty
                                       : getSpecialData?.noofDips !==
-                                          undefined ||
+                                        undefined ||
                                         getSpecialData?.noofDips !== "0"
-                                      ? Number(getSpecialData?.noofDips)
-                                      : 1
+                                        ? Number(getSpecialData?.noofDips)
+                                        : 1
                                   }
                                   className='form-control mx-2'
                                   style={{ width: "75px" }}
-                                  // onChange={(e) => handleDipsCount(e, data)}
+                                // onChange={(e) => handleDipsCount(e, data)}
                                 />
                               </div>
                             </li>
@@ -1173,8 +1174,8 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
                   <>
                     {(getSpecialData?.pops.length > 0 ||
                       getSpecialData.bottle.length > 0) && (
-                      <h6 className='text-left mt-1 mb-2'>Drinks</h6>
-                    )}
+                        <h6 className='text-left mt-1 mb-2'>Drinks</h6>
+                      )}
 
                     <div id='drinks' className='mb-3'>
                       <ul className='list-group'>
@@ -1257,7 +1258,7 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
                     onClick={handleAddToCart}
                   >
                     {payloadEdit !== undefined &&
-                    payloadEdit?.productType.toLowerCase() === "special_pizza"
+                      payloadEdit?.productType.toLowerCase() === "special_pizza"
                       ? "Edit"
                       : " Add to Cart"}
                   </button>

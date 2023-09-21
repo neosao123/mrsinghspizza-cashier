@@ -6,7 +6,7 @@ import Logo from "../../assets/logo.png";
 
 const Print = ({ orderDetail, printRef }) => {
   return (
-    <div className=' fs-6'>
+    <div className='d-non fs-6'>
       <div className='col-12 m-1' style={{ width: "273px" }} ref={printRef}>
         <div className='row'>
           <div className='d-flex justify-content-center'>
@@ -18,7 +18,7 @@ const Print = ({ orderDetail, printRef }) => {
               className='m-1'
             ></img>
             <div className='d-flex flex-column'>
-              <h3 className='text-center m-0 '>Mr Singh's Pizza</h3>
+              <h3 className='text-center m-0'>Mr Singh's Pizza</h3>
               <p className='text-center m-0 p-0'>Pure vegetarian</p>
             </div>
           </div>
@@ -59,7 +59,6 @@ const Print = ({ orderDetail, printRef }) => {
               </div>
               <div className='col-12 d-flex justify-content-between'>
                 <div className="col-6">
-
                   {orderDetail?.customerName !== "" && (
                     <p className='m-0 fw-bold'>{orderDetail?.customerName}</p>
                   )}
@@ -111,6 +110,7 @@ const Print = ({ orderDetail, printRef }) => {
         </div>
         {orderDetail?.orderItems?.map((order, index) => {
           const product_type = order.productType.toLowerCase();
+          console.log("orderitem", order);
           const objectToArray = Object.entries(order?.config).map(
             ([key, value]) => ({ key, value })
           );
@@ -131,6 +131,7 @@ const Print = ({ orderDetail, printRef }) => {
                   <div className='row g-0 m-0 p-0'>
                     <div className='col-9'>
                       {product_type === "custom_pizza" ? "" : order.productName}
+                      {product_type === "side" ? ` (${order.config?.sidesSize})` : null}
                     </div>
                     <div className='col-3 text-end '>
                       ${" "}
@@ -202,6 +203,7 @@ const Print = ({ orderDetail, printRef }) => {
                           item.value[0]?.sidesName !== undefined) ? (
                         <div className='row pe-0'>
                           {item.value.map((side, index) => {
+                            console.log(side.sideSize);
                             return (
                               <>
                                 <div className='col-2 d-flex align-items-end'>
@@ -236,11 +238,10 @@ const Print = ({ orderDetail, printRef }) => {
                                               ? ` ` + side?.sideName
                                               : null}
                                           </span>
-
                                           <span>
-                                            {side?.sideSize === undefined
-                                              ? `(${side?.lineEntries[0]?.size})`
-                                              : `(${side?.sideSize})`}
+                                            {side?.sideSize !== undefined
+                                              ? `(${side?.sideSize})`
+                                              : `(${side?.lineEntries[0]?.size})`}
                                           </span>
                                         </div>
                                         {product_type !== "special_pizza" && (
