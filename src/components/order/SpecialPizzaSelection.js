@@ -197,6 +197,7 @@ function SpecialPizzaSelection({
                               pizzaState[count - 1]?.toppings
                                 ?.countAsTwoToppings[comm]?.placement
                             }
+                            id={`placement-${count-1}-${countAsTwoToppings.toppingsCode}`}
                             onChange={(e) => {
                               handleCountAsTwoToppingsPlacementChange(
                                 e,
@@ -279,6 +280,7 @@ function SpecialPizzaSelection({
                               pizzaState[count - 1]?.toppings
                                 ?.countAsOneToppings[comm]?.placement
                             }
+                            id={`placement-${count-1}-${countAsOneToppings.toppingsCode}`}
                             onChange={(e) => {
                               handleCountAsOneToppingsPlacementChange(
                                 e,
@@ -362,6 +364,7 @@ function SpecialPizzaSelection({
                                 index
                               ]?.placement
                             }
+                            id={`placement-${count-1}-${freeToppings.toppingsCode}`}
                             onChange={(e) => {
                               handleFreeToppingsPlacementChange(
                                 e,

@@ -9,7 +9,7 @@ import {
   SelectDropDownCrust,
   SelectDropDownSpecialBases,
 } from "./createYourOwn/selectDropDown";
-import {} from "./createYourOwn/selectDropDown";
+import { } from "./createYourOwn/selectDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, setCart } from "../../reducer/cartReducer";
 
@@ -251,6 +251,10 @@ function CreateYourOwn({
         (topping) => topping.toppingsCode === toppingCode
       );
       let placement = "whole";
+      const placementValue = $("#placement-" + toppingCode).val();
+      if (placementValue !== "" && placementValue !== undefined) {
+        placement = placementValue;
+      }
       const toppingObj = {
         toppingsCode: selectedTopping[0].toppingsCode,
         toppingsName: selectedTopping[0].toppingsName,
@@ -259,7 +263,6 @@ function CreateYourOwn({
           : "0",
         toppingsPlacement: placement,
       };
-
       setCountTwoToppingsArr([...countTwoToppingsArr, toppingObj]);
     } else {
       setCountTwoToppingsArr((prevToppings) =>
@@ -275,6 +278,7 @@ function CreateYourOwn({
       )
     );
   };
+
   // handle Two Toppings Placement
   const handleCountAsTwoToppingsPlacementChange = (e, countAsTwoToppings) => {
     const selectedValue = e.target.value;
@@ -353,6 +357,7 @@ function CreateYourOwn({
     }
     setCountOneToppingsArr(arr);
   };
+
   // handle Free Toppings
   const handleFreeToppings = (e, toppingCode) => {
     const { checked } = e.target;
@@ -710,7 +715,7 @@ function CreateYourOwn({
         <>
           <h6 className="text-center">
             {payloadEdit !== undefined &&
-            payloadEdit.productType === "custom_pizza"
+              payloadEdit.productType === "custom_pizza"
               ? "Edit Pizza"
               : "Pizza Selection"}
           </h6>
@@ -771,7 +776,7 @@ function CreateYourOwn({
                   value=""
                   checked={
                     freeToppingsArr?.length ===
-                    allIngredients?.toppings?.freeToppings?.length
+                      allIngredients?.toppings?.freeToppings?.length
                       ? true
                       : false
                   }
@@ -1245,7 +1250,7 @@ function CreateYourOwn({
               onClick={handleAddToCart}
             >
               {payloadEdit !== undefined &&
-              payloadEdit.productType === "custom_pizza"
+                payloadEdit.productType === "custom_pizza"
                 ? "Edit order"
                 : "Add to Cart"}
             </button>
