@@ -9,7 +9,7 @@ import {
   SelectDropDownCrust,
   SelectDropDownSpecialBases,
 } from "./createYourOwn/selectDropDown";
-import { } from "./createYourOwn/selectDropDown";
+import {} from "./createYourOwn/selectDropDown";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, setCart } from "../../reducer/cartReducer";
 
@@ -676,7 +676,7 @@ function CreateYourOwn({
     );
     selectedObject = {
       ...selectedObject,
-      placement: selectedValue,
+      toppingsPlacement: selectedValue,
     };
     let indexOfSelectedObject = freeToppingsArr?.findIndex(
       (option) => option.toppingsCode === toppingsCode
@@ -715,7 +715,7 @@ function CreateYourOwn({
         <>
           <h6 className="text-center">
             {payloadEdit !== undefined &&
-              payloadEdit.productType === "custom_pizza"
+            payloadEdit.productType === "custom_pizza"
               ? "Edit Pizza"
               : "Pizza Selection"}
           </h6>
@@ -776,7 +776,7 @@ function CreateYourOwn({
                   value=""
                   checked={
                     freeToppingsArr?.length ===
-                      allIngredients?.toppings?.freeToppings?.length
+                    allIngredients?.toppings?.freeToppings?.length
                       ? true
                       : false
                   }
@@ -1063,7 +1063,7 @@ function CreateYourOwn({
                                 data-topping-area={toppingCode}
                                 className="form-select d-inline-block"
                                 style={{ width: "65%" }}
-                                value={freeToppingsArr[comm]?.placement}
+                                value={freeToppingsArr[comm]?.toppingsPlacement}
                                 id={"placement-" + toppingCode}
                                 // onChange={(e) => {
                                 //   if (comm !== -1) {
@@ -1250,7 +1250,7 @@ function CreateYourOwn({
               onClick={handleAddToCart}
             >
               {payloadEdit !== undefined &&
-                payloadEdit.productType === "custom_pizza"
+              payloadEdit.productType === "custom_pizza"
                 ? "Edit order"
                 : "Add to Cart"}
             </button>

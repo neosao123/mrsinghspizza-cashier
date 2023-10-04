@@ -491,7 +491,7 @@ function SpecialMenu({ setPayloadEdit, payloadEdit, specialTabRef }) {
       payloadEdit !== undefined &&
       payloadEdit?.productType === "special_pizza"
     ) {
-      //console.log(payloadEdit, "edit item on click");
+      console.log(payloadEdit, "edit item on click");
       handleGetSpecial({ code: payloadEdit?.productCode });
       setPizzaState(payloadEdit?.config?.pizza);
       setDrinksArr(payloadEdit?.config?.drinks);
